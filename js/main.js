@@ -1,7 +1,16 @@
 
 // 1
-const numberOfFilms = prompt('Сколько фильмов вы уже посмотрели?', '');
-console.log(numberOfFilms)
+let numberOfFilms
+
+function start() {
+   numberOfFilms = prompt('Сколько фильмов вы уже посмотрели?', '');
+
+   while(numberOfFilms == '' || numberOfFilms == null || isNaN(numberOfFilms) ) {
+      numberOfFilms = prompt('Сколько фильмов вы уже посмотрели?', '');
+   }
+}
+
+start()
 
 //2
 
@@ -20,15 +29,51 @@ const personalMovieDB = {
 }
 
 //3
+function rememberMyFilms() {
+for(let i = 0; i < 2; i++) {
+      const questFirst = prompt('Один из последних просмотренных фильмов?');
+      const questSeond = prompt('На сколько оцените его?')
+      
+      if(questFirst === null || questFirst.length > 50 || questFirst.length == 0) {
+         i--
+      } else {
+         personalMovieDB.movies[questFirst] = questSeond;
+      }
+   }
+  
+}
+rememberMyFilms()
 
-const questFirst = prompt('Один из последних просмотренных фильмов?')
-const questSeond = prompt('На сколько оцените его?')
-const questThird = prompt('Один из последних просмотренных фильмов?')
-const questForth = prompt('На сколько оцените его?')
+function detectPersonalLevel() {
+   if(parseInt(personalMovieDB.count) < 10) {
+      alert('Просмотренно довольно мало фильмов')
+   } else if(parseInt(personalMovieDB.count) >= 10 && parseInt(personalMovieDB.count) <= 30) {
+      alert('вы класический зритель')
+   } else if(parseInt(personalMovieDB.count) > 30) {
+      alert('Вы киноман')
+   } else {
+      alert('Произошла ошибка')
+   }
+}
 
-const movies = {}
+detectPersonalLevel();
 
-personalMovieDB.movies[questFirst] = questSeond
-personalMovieDB.movies[questThird] = questForth
+function writeYourGenres(){
+   for(let i = 1; i <= 3; i++) {
+      const a = prompt(`Ваш любимый жанр под номером ${i}`)
+      personalMovieDB.genres[i - 1] =  a
+   }
+}
 
-console.log(personalMovieDB)
+writeYourGenres()
+
+function showMyDb() {
+   if(personalMovieDB.privat == false) {
+      console.log(personalMovieDB)
+   }
+}
+
+showMyDb()
+
+//4
+
